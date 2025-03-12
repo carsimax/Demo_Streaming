@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Prueba de Streaming de Video</title>
+    <style>
+        body { font-family: Arial, sans-serif; margin: 20px; }
+        h1 { color: #333; }
+        #videoPlayer { max-width: 800px; margin-top: 20px; }
+        .form-group { margin-bottom: 15px; }
+        button { padding: 8px 15px; background: #4CAF50; color: white; border: none; cursor: pointer; }
+        input[type="text"] { padding: 8px; width: 300px; }
+        #videoContainer { margin-top: 30px; }
+    </style>
+</head>
+<body>
+    <h1>Prueba de Streaming de Video</h1>
+    
+    <div class="form-group">
+        <label for="videoId">ID del Video:</label>
+        <input type="text" id="videoId" placeholder="Ingresa el ID del video">
+        <button onclick="cargarVideo()">Cargar Video</button>
+    </div>
+    
+    <div id="videoContainer">
+        <video id="videoPlayer" controls>
+            Tu navegador no soporta la reproducción de video.
+        </video>
+    </div>
+
+    <script>
+        function cargarVideo() {
+            const videoId = document.getElementById('videoId').value;
+            if (!videoId) {
+                alert('Por favor, ingresa un ID de video');
+                return;
+            }
+            
+            const videoPlayer = document.getElementById('videoPlayer');
+            videoPlayer.src = `http://localhost:8080/api/videos/stream/${videoId}`;
+            videoPlayer.load();
+        }
+    </script>
+</body>
+</html>
